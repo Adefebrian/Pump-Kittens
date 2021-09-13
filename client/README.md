@@ -1,4 +1,4 @@
-# umans-world
+# pump kittens-world
 
 ## Project setup
 ```
