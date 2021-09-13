@@ -11,14 +11,12 @@
                     <v-btn text small>Home</v-btn>
                     <v-btn text small>Help</v-btn>
                 </v-row>
-
             </v-container>
         </v-app-bar>
         <v-main>
             <router-view/>
         </v-main>
         <v-footer style="z-index: 1" color="transparent" elevation="2">
-
             <v-container class="py-3">
               <div class="text-center font-weight-bold black--text pb-2">Social Links</div>
               <v-row align="center" justify="center">
