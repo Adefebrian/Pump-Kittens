@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,700&display=swap');
+.v-application{
+  font-family: 'Raleway',sans-serif!important;
+    [class*='text-'] {
+    color: #36405a;
+    font-family: 'Raleway', sans-serif !important;
+  }
+}
+
+#app:after {
+    content:'';
+    position: fixed;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(#FC748D, #754CA2);
+    z-index: 0;
+}
+.v-main{
+    z-index: 1;
+}
