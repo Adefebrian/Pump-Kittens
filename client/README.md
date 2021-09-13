@@ -1,4 +1,4 @@
-# pump kittens-world
+# Pump Kittens-World
 
 ## Project setup
 ```
