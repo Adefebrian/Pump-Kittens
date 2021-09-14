@@ -21,7 +21,8 @@
             <ol class="list-box">
               <li class="my-1">
                 Connect your Wallet
-                <v-btn color="black" outlined elevation="2" class="ml-2" small>Connected</v-btn>
+                <v-btn @click="connectWallet" v-if="isMetaMaskInstalled && !isMetaMaskConnected" color="black" outlined elevation="2" class="ml-2" small>Connect</v-btn>
+                <v-btn @click="lockMetamask" v-if="isMetaMaskInstalled && isMetaMaskConnected" color="black" outlined elevation="2" class="ml-2" small>Connected</v-btn>
               </li>
               <li class="my-1">Mint your Uman</li>
               <li class="my-1">View your Umans! (You also can send BitUmans to other addresses)</li>
@@ -57,5 +58,27 @@ export default {
       currentTab: "mint",
     };
   },
+  computed: {
+      isMetaMaskInstalled() {
+          const { ethereum } = window;
+          return Boolean(ethereum && ethereum.isMetaMask)
+      },
+      isMetaMaskConnected() {
+          return this.$store.state.account!=null;
+      },
+      hasMessage() {
+          return this.$store.state.messageContent!=null
+      }
+  },
+  mounted() {
+  },
+  methods: {
+      connectWallet() {                
+          this.$store.dispatch("connect")              
+      },
+      lockMetamask() {
+          this.$store.dispatch("disconnect")
+      }
+  }
 };
 </script>
