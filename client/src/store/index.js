@@ -9,7 +9,7 @@ BigNumber.config({ EXPONENTIAL_AT: 100 })
 
 // const ADDR_NULL = '0x0000000000000000000000000000000000000000';
 const ADDR_OWNER = '0x2C4C168A2fE4CaB8E32d1B2A119d4Aa8BdA377e7'
-const ADDR_TOKEN_PUMP_KITTENS = '0xd9145CCE52D386f254917e481eB44e9943F39138'
+const ADDR_TOKEN_PUMP_KITTENS = '0x4592f76168715889bBE4e1f810Fec00B178df810'
 
 Vue.use(Vuex)
 
@@ -23,7 +23,8 @@ export default new Vuex.Store({
     },
     pumpkittens: {
         totalSupply: Number,
-        price: BigNumber
+        price: BigNumber,
+        tokenIds: []
     },
     isOwner() {
         if(this.account==null)
@@ -123,17 +124,26 @@ export default new Vuex.Store({
         }
       });  
     },
+    getTokenIdsOfOwner({state,commit},params) {
+        state.contracts.tokenPumpKittens.methods.getTokenIdsOfOwner(params.account).call({
+            from: state.account.address
+        }).then((ret)=>{
+            state.pumpkittens.tokenIds = ret;
+            console.log(state.pumpkittens.tokenIds);
+            commit('show_success', 'Success!');
+        })
+    },
     disconnect({state}) {
         state.account = null
     },
     mint({state,commit}) {
-        console.log(2313123123);
         state.contracts.tokenPumpKittens.methods.buyPumpKittens().send({
-            from: state.account.address
+            from: state.account.address,
+            value:BigNumber(state.pumpkittens.price).integerValue().toString()
           }).then(()=>{
-            commit('show_success', 'Success!')
-            commit('read_pumpkittens')
+            commit('show_success', 'Success!');
+            commit('read_pumpkittens');
           })
-      },
+    },
   }
 })

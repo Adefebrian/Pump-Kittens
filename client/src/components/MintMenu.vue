@@ -8,11 +8,12 @@
             :src="profile.url"
             contain
         />
+        <span>fdfsdf</span>
       </v-col>
     </v-row>
     <div class="text-center">
       <v-btn @click="mint" color="black" outlined elevation="4">MINT MY UMAN!</v-btn>
-      <div class="hilight">price : {{nftPrice.toFormat(2)}} FTM</div>
+      <div class="hilight">price : {{nftPrice.toFormat(3)}} FTM</div>
     </div>
 
   </div>
@@ -44,7 +45,7 @@ export default {
   computed: {
       nftPrice() {
         if(this.$store.state.account) {
-          return BigNumber(this.$store.state.pumpkittens.price);
+          return BigNumber(this.$store.state.pumpkittens.price).shiftedBy(-18);
         }
         
         return BigNumber(0);
@@ -63,7 +64,8 @@ export default {
   methods: {
       mint() {                
           this.$store.dispatch('mint')              
-      }
+      },
+
   }
 };
 </script>

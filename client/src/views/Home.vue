@@ -36,7 +36,7 @@
         <v-card color="transparent">
           <v-card-text>
             <Mint v-show="currentTab === 'mint'"/>
-            <UmansViewer v-show="currentTab === 'uman'"/>
+            <PumpKittensViewer v-show="currentTab === 'uman'"/>
             <Attribute v-show="currentTab === 'attribute'"></Attribute>
           </v-card-text>
         </v-card>
@@ -47,12 +47,12 @@
 
 <script>
 import Mint from "@/components/MintMenu.vue";
-import UmansViewer from "@/components/UmansViewer.vue";
+import PumpKittensViewer from "@/components/PumpKittensViewer.vue";
 import Attribute from "@/components/attribute";
 
 export default {
   name: "Attributes",
-  components: {Attribute, Mint, UmansViewer},
+  components: {Attribute, Mint, PumpKittensViewer},
   data() {
     return {
       currentTab: "mint",
