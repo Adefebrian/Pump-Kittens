@@ -2,15 +2,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { BigNumber } from 'bignumber.js'
 import axios from 'axios'
-//import * as ethUtil from 'ethereumjs-util'
 
 import abiPUMPKITTENS from '@/abi/pumpkittens.json'
 
 BigNumber.config({ EXPONENTIAL_AT: 100 })
 
-// const ADDR_NULL = '0x0000000000000000000000000000000000000000';
 const ADDR_OWNER = '0x2C4C168A2fE4CaB8E32d1B2A119d4Aa8BdA377e7'
-const ADDR_TOKEN_PUMP_KITTENS = '0x93BC0a591685098433dCc990da7f006812EB7601'
+const ADDR_TOKEN_PUMP_KITTENS = '0xe3aCbA7a02F267e5F0F2ed1756fa2E1552135FF8'
+const MAXIMUM_MINT_TOKEN = 8;
 
 Vue.use(Vuex)
 
@@ -63,6 +62,7 @@ export default new Vuex.Store({
         state.messageType = 'warning'
     },
     read_pumpkittens(state) {
+      console.log(423424234);
         state.contracts.tokenPumpKittens.methods.totalSupply().call().then((ret)=>{
             state.pumpkittens.totalSupply = BigNumber(ret);
             }).catch((error)=>{
@@ -139,10 +139,16 @@ export default new Vuex.Store({
       });  
     },
     async getTokenIdsOfOwner({state, commit},params) {
+        if (state.account==null)
+        {
+            commit('show_warning', 'Please connect Wallet!');
+            return false;         
+        }
+
         if (!window.web3.utils.isAddress(params.account))
         {
             commit('show_warning', 'Address Error!');
-            return;
+            return false;
         }
 
         await state.contracts.tokenPumpKittens.methods.getTokenIdsOfOwner(params.account).call({
@@ -151,18 +157,20 @@ export default new Vuex.Store({
             state.pumpkittens.tokenIds = ret[0];
             state.pumpkittens.tokenPrices = ret[1];
             state.pumpkittens.tokenURIs = ret[2];
+
+            return true;
         })
+
+        return true;
     },
-    async constructTokenInfo({state,commit}, params) {
-        if (!window.web3.utils.isAddress(params.account))
-        {
-            return;
-        }
+    async constructTokenInfo({state,commit}) {
         let nlength = state.pumpkittens.tokenURIs.length;
 
         if (nlength == 0)
         {
             state.searchResult = false;
+            commit('show_warning', 'No Result!');
+
             return;
         }
 
@@ -184,12 +192,22 @@ export default new Vuex.Store({
         state.pumpkittens.tokenAttributes = tokenAttributes;
         
         state.searchResult = true;
-        commit('show_success', 'Success!');
     },
     disconnect({state}) {
         state.account = null
     },
     mint({state,commit}) {
+        if (state.account==null)
+        {
+          commit('show_warning', 'Please connect Wallet!');
+          return;         
+        }
+
+        if (state.pumpkittens.totalSupply == MAXIMUM_MINT_TOKEN)
+        {
+          commit('show_warning', 'No More Tokens!');
+          return;
+        }
         state.contracts.tokenPumpKittens.methods.buyPumpKittens().send({
             from: state.account.address,
             value:BigNumber(state.pumpkittens.price).integerValue().toString()
@@ -213,7 +231,7 @@ export default new Vuex.Store({
         if (!window.web3.utils.isAddress(params.to))
         {
             commit('show_warning', 'Address Error!');
-            return;
+            return false;
         }
 
         state.contracts.tokenPumpKittens.methods.safeTransferFrom(state.account.address, params.to, params.tokenID)
@@ -221,6 +239,8 @@ export default new Vuex.Store({
             from: state.account.address
           }).then(()=>{
             commit('show_success', 'Success!');
+
+            return true;
         })
     },
   }

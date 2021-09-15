@@ -2,10 +2,6 @@
   <div class="holder">
     <div class="text-h6">Enter your wallet address to find your Pump Kittens.</div>
     <v-text-field v-model="account" class="walletForm" type="text" placeholder="Wallet Address"></v-text-field>
-<!--<div v-if="pending" class="hilight">
-      Loading ...
-    </div>
--->
     <v-dialog
       v-model="dialog"
       hide-overlay
@@ -31,7 +27,7 @@
     <v-row class="my-7 mx-0" v-if="this.$store.state.searchResult">
       <v-col cols="4" lg="3" md="2" sm="3" class="pa-1" v-for="(imageURI,idx) in this.$store.state.pumpkittens.imageURIs"
           :key="idx">
-          <SendDialog :id="tokenId(idx)" />
+          <SendDialog :id="tokenId(idx)" :account="searchAccount()" />
           <v-img
               :src="imageURI"
               contain
@@ -78,19 +74,29 @@ export default {
     tokenName(index) {
       return this.$store.state.pumpkittens.tokenNames[index];
     },
+    searchAccount() {
+      return this.account;
+    },
     tokenAttributes(index) {
       return this.$store.state.pumpkittens.tokenAttributes[index];
     },
     async search() {         
       this.pending = true;
       try {
-        await this.$store.dispatch('getTokenIdsOfOwner', {
+        let result;
+        result = await this.$store.dispatch('getTokenIdsOfOwner', {
           account:this.account
         })
 
-        await this.$store.dispatch('constructTokenInfo', {
-          account:this.account
-        })
+        console.log(result);
+        if (!result)
+        {
+          this.pending = false;
+          this.error = true;
+          return;
+        }
+
+        await this.$store.dispatch('constructTokenInfo')
 
         this.error = false;
       }

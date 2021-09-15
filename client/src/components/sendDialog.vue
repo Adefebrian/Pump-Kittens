@@ -26,21 +26,52 @@
     data () {
       return {
         dialog: false,
-        recipientAddress: null
+        recipientAddress: null,
+        transfered: false,
+        error: false
       }
     },
     props: {
-        id: {type: String}
+        id: {type: String},
+        account: null
     },
     mounted() {
     },
+    unmounted() {
+    },
+    watch:{
+        dialog:function(newValue){
+            if(!newValue){
+                this.research();
+                this.transfered = false;
+            }
+        }
+    },
     methods: {
         transferToken() {         
-            this.$store.dispatch('transferToken', {
+            if (this.$store.dispatch('transferToken', {
                 tokenID:this.id,
                 to:this.recipientAddress
-            })
+            }))
+            this.transfered = true;
         },
+        async research() {
+            if (this.transfered)
+            {
+                try {
+                    await this.$store.dispatch('getTokenIdsOfOwner', {
+                        account:this.account
+                    })
+
+                    await this.$store.dispatch('constructTokenInfo', {
+                        account:this.account
+                    })
+                }
+                catch (e) {
+                    this.error = e;
+                }
+            }
+        }
     }
   }
 </script>

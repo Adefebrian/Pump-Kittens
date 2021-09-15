@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="text-center text-h5 font-weight-bold">{{totalSupply}} / 500 PUMP KITTENS Minted</div>
+    <div class="text-center text-h5 font-weight-bold">{{totalSupply}} / 7 PUMP KITTENS Minted</div>
     <v-row class="my-7 mx-0">
       <v-col cols="4" lg="2" md="2" sm="3" class="pa-1" v-for="(profile,idx) in profiles"
             :key="idx">
@@ -8,7 +8,6 @@
             :src="profile.url"
             contain
         />
-        <span>fdfsdf</span>
       </v-col>
     </v-row>
     <div class="text-center">
