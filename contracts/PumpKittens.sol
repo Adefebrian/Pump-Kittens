@@ -7,37 +7,40 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract PumpKittens is ERC721PresetMinterPauserAutoId, Ownable {
     using Counters for Counters.Counter;
     
-    uint public reservePrice = 0.0001 ether;
+    uint public reservePrice = 1 ether;
     uint public currentPrice;
     uint public previousPrice;
     uint public addPriceRate = 500;       // 5%
-    uint public constant MAX_UMANS = 50;
+    uint public constant MAX_PUMPKITTENS = 7;
     Counters.Counter private _tokenIdTracker;
     
-    mapping(uint256 => bool) _tokenExists;
+    mapping(uint => bool) _tokenExists;
+    mapping(uint => uint256) _tokenPrice;
 
-    constructor() ERC721PresetMinterPauserAutoId("Pump Kittens", "PK", "http://localhost:3000/") {
+//    constructor() ERC721PresetMinterPauserAutoId("Pump Kittens", "PK", "https://gateway.pinata.cloud/ipfs/QmX6mUMS3aDTKJ22r5tWt8854SnNbxrPMxaC1w14A7k1wC/") {
+    constructor() ERC721PresetMinterPauserAutoId("mil123", "mil123", "https://gateway.pinata.cloud/ipfs/QmX6mUMS3aDTKJ22r5tWt8854SnNbxrPMxaC1w14A7k1wC/") {
         currentPrice = reservePrice;
         previousPrice = 0;
     }
     
-    function buyUman() public payable {
+    function buyPumpKittens() public payable {
         require(msg.value == currentPrice);
-        require(_tokenIdTracker.current() <= MAX_UMANS);
+        require(_tokenIdTracker.current() <= MAX_PUMPKITTENS);
         
-        uint256 randomNumber = 0;
-        _tokenExists[randomNumber] = true;
+        uint256 tokenId = 0;
+        _tokenExists[tokenId] = true;
         
-        while (_tokenExists[randomNumber])
+        while (_tokenExists[tokenId])
         {
-            randomNumber = uint256(keccak256(abi.encodePacked(block.difficulty, block.timestamp, _tokenIdTracker.current()))) % 50 + 1;
+            tokenId = uint256(keccak256(abi.encodePacked(block.difficulty, block.timestamp, _tokenIdTracker.current()))) % 7 + 1;
         }
         
         _tokenIdTracker.increment();
 
-        _mint(_msgSender(), randomNumber);
+        _mint(_msgSender(), tokenId);
         
-        _tokenExists[randomNumber] = true;
+        _tokenExists[tokenId] = true;
+        _tokenPrice[tokenId] = currentPrice;
         
         previousPrice = currentPrice;
         currentPrice = previousPrice + previousPrice * addPriceRate / 10000;
@@ -62,4 +65,20 @@ contract PumpKittens is ERC721PresetMinterPauserAutoId, Ownable {
     function withdrawAll() public payable onlyOwner {
         require(payable(msg.sender).send(address(this).balance));
     }  
+    
+    function getTokenIdsOfOwner(address account) public view 
+        returns(uint[] memory tokenIds, uint256[] memory priceOfTokenIds, string[] memory tokenURIs)
+    {
+        uint balance = balanceOf(account);
+        tokenIds = new uint[](balance);
+        priceOfTokenIds = new uint[](balance);
+        tokenURIs = new string[](balance);
+        
+        for (uint i=0; i<balance; i++)
+        {
+            tokenIds[i] = tokenOfOwnerByIndex(account, i);
+            priceOfTokenIds[i] = _tokenPrice[tokenIds[i]];
+            tokenURIs[i] = tokenURI(tokenIds[i]);
+        }
+    }
 }
