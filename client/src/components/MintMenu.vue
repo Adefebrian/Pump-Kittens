@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="text-center text-h5 font-weight-bold">{{totalSupply}} / 500 Bit Umans Minted</div>
+    <div class="text-center text-h5 font-weight-bold">{{totalSupply}} / 500 PUMP KITTENS Minted</div>
     <v-row class="my-7 mx-0">
       <v-col cols="4" lg="2" md="2" sm="3" class="pa-1" v-for="(profile,idx) in profiles"
             :key="idx">
@@ -12,7 +12,7 @@
       </v-col>
     </v-row>
     <div class="text-center">
-      <v-btn @click="mint" color="black" outlined elevation="4">MINT MY UMAN!</v-btn>
+      <v-btn @click="mint" color="black" outlined elevation="4">MINT MY PUMP KITTEN!</v-btn>
       <div class="hilight">price : {{nftPrice.toFormat(3)}} FTM</div>
     </div>
 

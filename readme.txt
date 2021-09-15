@@ -33,3 +33,9 @@ The name of the project is Pumpkittens o
 we are just forking bitumans that's all
 User Avatar
 token name is Pumpkittens (PK)
+
+
+uman account
+0xC1E311B58d1BFd4349D9C37FD14a996e845758E5
+
+0x2C4C168A2fE4CaB8E32d1B2A119d4Aa8BdA377e7

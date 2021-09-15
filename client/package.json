@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.10.12",
+    "axios": "^0.21.4",
     "bignumber.js": "^9.0.1",
     "core-js": "^3.6.5",
     "quasar": "^2.0.4",

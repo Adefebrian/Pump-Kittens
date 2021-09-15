@@ -1,0 +1,32 @@
+{
+  "description": "Artists' Liberation Front Fist",
+  "external_url": "https://artistunleashed.app/static/media/logo.9a99eea9.png",
+  "image": "https://gateway.pinata.cloud/ipfs/QmaCVZhWEouMZuZkEgLumahHKvYe6RJ4jJCsmuAd3TkmrT/5.jpeg",
+  "name": "punkkitten-5",
+ "attributes": [
+    {
+      "trait_type": "Head Accessories",
+      "value": "Punk Hair"
+    }
+    ,
+    {
+      "trait_type": "Necklaces",
+      "value": "Choker"
+    }
+    ,
+    {
+      "trait_type": "Sun Glasses",
+      "value": "Round"
+    }
+    ,
+    {
+      "trait_type": "Eyes",
+      "value": "Closed"
+    }
+    ,
+    {
+      "trait_type": "Earings",
+      "value": "Short Studs"
+    }
+  ]
+}
