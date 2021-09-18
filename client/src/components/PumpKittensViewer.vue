@@ -88,7 +88,6 @@ export default {
           account:this.account
         })
 
-        console.log(result);
         if (!result)
         {
           this.pending = false;
