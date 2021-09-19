@@ -16,8 +16,8 @@
         <v-card color="transparent" class="mb-3">
           <v-card-text>
             <div class="text-h6">
-              <b>PumpKittens</b> is a collection of <b>50 unique PumpKittems</b> NFTs
-              living on the <b>Fantom Network</b>
+              <b>'Pumpkittens'</b> is a collection of <b>50 rare and unique Pumpkitten</b> NFTs
+              living on the <b>Fantom blockchain.</b>
             </div>
             <ol class="list-box">
               <li class="my-1">
@@ -25,11 +25,11 @@
                 <v-btn @click="connectWallet" v-if="isMetaMaskInstalled && !isMetaMaskConnected" color="black" outlined elevation="2" class="ml-2" small>Connect</v-btn>
                 <v-btn @click="lockMetamask" v-if="isMetaMaskInstalled && isMetaMaskConnected" color="black" outlined elevation="2" class="ml-2" small>Connected</v-btn>
               </li>
-              <li class="my-1">Mint your PumpKitten</li>
-              <li class="my-1">View your PumpKittens! (You also can send PumpKittens to other addresses)</li>
+              <li class="my-1">Mint Your Pumpkitten</li>
+              <li class="my-1">View your Pumpkittens! (You can also send Pumpkittens to other addresses)</li>
               <li class="my-1">
-                Once all PumpKittens are minted you will be able to export them to any
-                <b>ERC-721 Standard</b> compatible marketplace running on Fantom
+                Once all Pumpkittens are minted you will be able to export them to any
+                <b>ERC-721 Standard</b> compatible marketplace or addresses on Fantom.
               </li>
             </ol>
           </v-card-text>
