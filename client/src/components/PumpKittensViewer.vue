@@ -1,6 +1,6 @@
 <template>
   <div class="holder">
-    <div class="text-h6">Enter your wallet address to find your PumpKittens.</div>
+    <div class="text-h6">Enter your wallet address to find your Pumpkittens.</div>
     <v-text-field v-model="account" class="walletForm" type="text" placeholder="Wallet Address"></v-text-field>
     <v-dialog
       v-model="dialog"

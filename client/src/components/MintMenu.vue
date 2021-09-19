@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="text-center text-h5 font-weight-bold">{{totalSupply}} / 50 PumpKittens Minted</div>
+    <div class="text-center text-h5 font-weight-bold">{{totalSupply}} / 50 Pumpkittens Minted</div>
     <v-row class="my-7 mx-0">
       <v-col cols="4" lg="2" md="2" sm="3" class="pa-1" v-for="(profile,idx) in profiles"
             :key="idx">

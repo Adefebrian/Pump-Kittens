@@ -657,5 +657,6 @@ export default {
 .img-attrb {
   width:70px;
   height:70px;
+  opacity: .8;
 }
 </style>
