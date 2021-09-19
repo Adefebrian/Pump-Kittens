@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-app-bar fixed app color="#FC748D" elevation="2">
+        <v-app-bar fixed app elevation="2" class="header">
             <v-container>
                 <v-row align="center">
                     <div class="d-flex align-center">
@@ -53,9 +53,13 @@
 </script>
 
 <style scoped>
-.link{
+.link {
     color: rgb(70, 36, 70);
     margin: 5px 0;
     text-decoration: none;
+}
+
+.header {
+    background-image: linear-gradient( 109.6deg, rgba(238, 116, 228, 0.829) 11.2%, rgba(196, 95, 0, 0.774) 91.1% );
 }
 </style>
