@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="text-center text-h5 font-weight-bold">{{totalSupply}} / 7 PUMP KITTENS Minted</div>
+    <div class="text-center text-h5 font-weight-bold">{{totalSupply}} / 50 PumpKittens Minted</div>
     <v-row class="my-7 mx-0">
       <v-col cols="4" lg="2" md="2" sm="3" class="pa-1" v-for="(profile,idx) in profiles"
             :key="idx">
@@ -11,7 +11,7 @@
       </v-col>
     </v-row>
     <div class="text-center">
-      <v-btn @click="mint" color="black" outlined elevation="4">MINT MY PUMP KITTEN!</v-btn>
+      <v-btn @click="mint" color="black" outlined elevation="4">MINT MY PUMPKITTEN!</v-btn>
       <div class="hilight">price : {{nftPrice.toFormat(3)}} FTM</div>
     </div>
 
@@ -26,18 +26,18 @@ export default {
     return {
       title: "details",
       profiles: [
-        {url: 'https://gateway.pinata.cloud/ipfs/QmaCVZhWEouMZuZkEgLumahHKvYe6RJ4jJCsmuAd3TkmrT/1.png'},
-        {url: 'https://gateway.pinata.cloud/ipfs/QmaCVZhWEouMZuZkEgLumahHKvYe6RJ4jJCsmuAd3TkmrT/2.png'},
-        {url: 'https://gateway.pinata.cloud/ipfs/QmaCVZhWEouMZuZkEgLumahHKvYe6RJ4jJCsmuAd3TkmrT/3.png'},
-        {url: 'https://gateway.pinata.cloud/ipfs/QmaCVZhWEouMZuZkEgLumahHKvYe6RJ4jJCsmuAd3TkmrT/4.png'},
-        {url: 'https://gateway.pinata.cloud/ipfs/QmaCVZhWEouMZuZkEgLumahHKvYe6RJ4jJCsmuAd3TkmrT/5.jpeg'},
-        {url: 'https://gateway.pinata.cloud/ipfs/QmaCVZhWEouMZuZkEgLumahHKvYe6RJ4jJCsmuAd3TkmrT/6.jpeg'},
-        {url: 'https://gateway.pinata.cloud/ipfs/QmaCVZhWEouMZuZkEgLumahHKvYe6RJ4jJCsmuAd3TkmrT/7.png'},
-        {url: require("../assets/pixelImage.png")},
-        {url: require("../assets/pixelImage.png")},
-        {url: require("../assets/pixelImage.png")},
-        {url: require("../assets/pixelImage.png")},
-        {url: require("../assets/pixelImage.png")},
+        {url: require("../images/1.png")},
+        {url: require("../images/2.png")},
+        {url: require("../images/3.png")},
+        {url: require("../images/4.png")},
+        {url: require("../images/5.png")},
+        {url: require("../images/6.png")},
+        {url: require("../images/7.png")},
+        {url: require("../images/8.png")},
+        {url: require("../images/9.png")},
+        {url: require("../images/10.png")},
+        {url: require("../images/11.png")},
+        {url: require("../images/12.png")},
       ],
     };
   },

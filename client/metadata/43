@@ -1,0 +1,27 @@
+{
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/43.png",
+  "name": "Pumpkittens #43",
+  "attributes": [
+    {
+      "trait_type": "Dress",
+      "value": "Casual"
+    }
+    ,
+    {
+      "trait_type": "Standout",
+      "value": "Headphones"
+    }
+    ,
+    {
+      "trait_type": "Earrings",
+      "value": "Glasses"
+    }
+    ,
+    {
+      "trait_type": "Color",
+      "value": "Pink"
+    }
+  ]
+}

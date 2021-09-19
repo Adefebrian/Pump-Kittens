@@ -1,0 +1,21 @@
+{
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/45.png",
+  "name": "Pumpkittens #45",
+  "attributes": [
+    {
+      "trait_type": "Super rarity",
+      "value": "Unicorn horn"
+    },
+    {
+      "trait_type": "Dress",
+      "value": "Casual"
+    }
+    ,
+    {
+      "trait_type": "Color",
+      "value": "Pink"
+    }
+  ]
+}

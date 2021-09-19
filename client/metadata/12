@@ -1,0 +1,26 @@
+{
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/12.png",
+  "name": "Pumpkittens #12",
+  "attributes": [
+    {
+      "trait_type": "Uniqueness",
+      "value": "Bracelet"
+    },
+    {
+      "trait_type": "Dress",
+      "value": "Casual"
+    }
+    ,
+    {
+      "trait_type": "Standout",
+      "value": "Headband"
+    }
+    ,
+    {
+      "trait_type": "Color",
+      "value": "Green"
+    }
+  ]
+}

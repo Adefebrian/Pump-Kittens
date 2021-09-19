@@ -1,0 +1,21 @@
+{
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/24.png",
+  "name": "Pumpkittens #24",
+  "attributes": [
+    {
+      "trait_type": "Uniqueness",
+      "value": "Hat"
+    },
+    {
+      "trait_type": "Dress",
+      "value": "Winter"
+    }
+    ,
+    {
+      "trait_type": "Color",
+      "value": "Green"
+    }
+  ]
+}

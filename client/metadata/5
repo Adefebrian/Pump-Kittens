@@ -1,32 +1,35 @@
 {
-  "description": "Artists' Liberation Front Fist",
-  "external_url": "https://artistunleashed.app/static/media/logo.9a99eea9.png",
-  "image": "https://gateway.pinata.cloud/ipfs/QmaCVZhWEouMZuZkEgLumahHKvYe6RJ4jJCsmuAd3TkmrT/5.jpeg",
-  "name": "punkkitten-5",
- "attributes": [
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/5.png",
+  "name": "Pumpkittens #5",
+  "attributes": [
     {
-      "trait_type": "Head Accessories",
-      "value": "Punk Hair"
+      "trait_type": "Super rarity",
+      "value": "Crown"
+    },
+    {
+      "trait_type": "Uniqueness",
+      "value": "Bracelet"
+    },
+    {
+      "trait_type": "Dress",
+      "value": "Party"
     }
     ,
     {
-      "trait_type": "Necklaces",
-      "value": "Choker"
+      "trait_type": "Standout",
+      "value": "Waist chain"
     }
     ,
     {
-      "trait_type": "Sun Glasses",
-      "value": "Round"
+      "trait_type": "Earrings",
+      "value": "Gold & Diamond"
     }
     ,
     {
-      "trait_type": "Eyes",
-      "value": "Closed"
-    }
-    ,
-    {
-      "trait_type": "Earings",
-      "value": "Short Studs"
+      "trait_type": "Color",
+      "value": "Pink"
     }
   ]
 }

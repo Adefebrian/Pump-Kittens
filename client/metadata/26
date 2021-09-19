@@ -1,0 +1,31 @@
+{
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/26.png",
+  "name": "Pumpkittens #26",
+  "attributes": [
+    {
+      "trait_type": "Uniqueness",
+      "value": "Headband"
+    },
+    {
+      "trait_type": "Dress",
+      "value": "Casual"
+    }
+    ,
+    {
+      "trait_type": "Standout",
+      "value": "Glasses"
+    }
+    ,
+    {
+      "trait_type": "Earrings",
+      "value": "Gold & diamond"
+    }
+    ,
+    {
+      "trait_type": "Color",
+      "value": "Pink"
+    }
+  ]
+}

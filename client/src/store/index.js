@@ -8,7 +8,7 @@ import abiPUMPKITTENS from '@/abi/pumpkittens.json'
 BigNumber.config({ EXPONENTIAL_AT: 100 })
 
 const ADDR_OWNER = '0x2C4C168A2fE4CaB8E32d1B2A119d4Aa8BdA377e7'
-const ADDR_TOKEN_PUMP_KITTENS = '0xe3aCbA7a02F267e5F0F2ed1756fa2E1552135FF8'
+const ADDR_TOKEN_PUMPKITTENS = '0x984676C27Dbf3ac82f2e2a23Ff19E25eA9579Fbd'
 const MAXIMUM_MINT_TOKEN = 8;
 
 Vue.use(Vuex)
@@ -40,7 +40,7 @@ export default new Vuex.Store({
   },
   mutations: {
     init(state) {
-        state.contracts.tokenPumpKittens = new window.web3.eth.Contract(abiPUMPKITTENS, ADDR_TOKEN_PUMP_KITTENS);
+        state.contracts.tokenPumpKittens = new window.web3.eth.Contract(abiPUMPKITTENS, ADDR_TOKEN_PUMPKITTENS);
     },
     set_account(state,account) {
         state.account = account      

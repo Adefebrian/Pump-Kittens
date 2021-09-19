@@ -1,0 +1,22 @@
+{
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/38.png",
+  "name": "Pumpkittens #38",
+  "attributes": [
+    {
+      "trait_type": "Dress",
+      "value": "Casual"
+    }
+    ,
+    {
+      "trait_type": "Earrings",
+      "value": "Glasses"
+    }
+    ,
+    {
+      "trait_type": "Color",
+      "value": "Blue"
+    }
+  ]
+}

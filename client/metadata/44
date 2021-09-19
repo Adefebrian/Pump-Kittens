@@ -1,0 +1,31 @@
+{
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/44.png",
+  "name": "Pumpkittens #44",
+  "attributes": [
+    {
+      "trait_type": "Uniqueness",
+      "value": "Necklace"
+    },
+    {
+      "trait_type": "Dress",
+      "value": "Casual"
+    }
+    ,
+    {
+      "trait_type": "Standout",
+      "value": "Hat"
+    }
+    ,
+    {
+      "trait_type": "Earrings",
+      "value": "Pearl"
+    }
+    ,
+    {
+      "trait_type": "Color",
+      "value": "Green"
+    }
+  ]
+}

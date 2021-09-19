@@ -7,18 +7,17 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract PumpKittens is ERC721PresetMinterPauserAutoId, Ownable {
     using Counters for Counters.Counter;
     
-    uint public reservePrice = 1 ether;
+    uint public reservePrice = 150 ether;
     uint public currentPrice;
     uint public previousPrice;
-    uint public addPriceRate = 500;       // 5%
-    uint public constant MAX_PUMPKITTENS = 7;
+    uint public addPriceRate = 300;       // 3%
+    uint public constant MAX_PUMPKITTENS = 50;
     Counters.Counter private _tokenIdTracker;
     
     mapping(uint => bool) _tokenExists;
     mapping(uint => uint256) _tokenPrice;
 
-//    constructor() ERC721PresetMinterPauserAutoId("Pump Kittens", "PK", "https://gateway.pinata.cloud/ipfs/QmX6mUMS3aDTKJ22r5tWt8854SnNbxrPMxaC1w14A7k1wC/") {
-    constructor() ERC721PresetMinterPauserAutoId("mil123", "mil123", "https://gateway.pinata.cloud/ipfs/QmX6mUMS3aDTKJ22r5tWt8854SnNbxrPMxaC1w14A7k1wC/") {
+    constructor() ERC721PresetMinterPauserAutoId("PumpKittens", "PK", "https://gateway.pinata.cloud/ipfs/QmXJbmsHDSN4Q7hNqmEEJoEY4RtoSzMQ1f3jjKafjDqyTB/") {
         currentPrice = reservePrice;
         previousPrice = 0;
     }
@@ -30,9 +29,12 @@ contract PumpKittens is ERC721PresetMinterPauserAutoId, Ownable {
         uint256 tokenId = 0;
         _tokenExists[tokenId] = true;
         
+        uint index = 0;
         while (_tokenExists[tokenId])
         {
-            tokenId = uint256(keccak256(abi.encodePacked(block.difficulty, block.timestamp, _tokenIdTracker.current()))) % 7 + 1;
+            tokenId = uint256(keccak256(abi.encodePacked(block.difficulty, block.timestamp, _tokenIdTracker.current() + index))) % 7 + 1;
+            
+            index ++;
         }
         
         _tokenIdTracker.increment();

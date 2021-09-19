@@ -1,0 +1,26 @@
+{
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/16.png",
+  "name": "Pumpkittens #16",
+  "attributes": [
+    {
+      "trait_type": "Uniqueness",
+      "value": "Watch"
+    },
+    {
+      "trait_type": "Dress",
+      "value": "Party"
+    }
+    ,
+    {
+      "trait_type": "Standout",
+      "value": "Glasses & Hat"
+    }
+    ,
+    {
+      "trait_type": "Color",
+      "value": "Blue"
+    }
+  ]
+}

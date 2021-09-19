@@ -1,0 +1,21 @@
+{
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/31.png",
+  "name": "Pumpkittens #31",
+  "attributes": [
+    {
+      "trait_type": "Uniqueness",
+      "value": "Bracelets"
+    },
+    {
+      "trait_type": "Dress",
+      "value": "Party"
+    }
+    ,
+    {
+      "trait_type": "Color",
+      "value": "Cyan"
+    }
+  ]
+}

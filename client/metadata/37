@@ -1,0 +1,26 @@
+{
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/37.png",
+  "name": "Pumpkittens #37",
+  "attributes": [
+    {
+      "trait_type": "Uniqueness",
+      "value": "Necklace & Bracelet"
+    },
+    {
+      "trait_type": "Dress",
+      "value": "Party"
+    }
+    ,
+    {
+      "trait_type": "Standout",
+      "value": "Glasses"
+    }
+    ,
+    {
+      "trait_type": "Color",
+      "value": "Green"
+    }
+  ]
+}

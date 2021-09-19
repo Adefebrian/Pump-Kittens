@@ -6,7 +6,7 @@
         <v-card color="transparent">
           <v-card-text>
             <v-btn @click="currentTab = 'mint'" block large color="transparent" class="my-3">MINT</v-btn>
-            <v-btn @click="currentTab = 'pumpkittens'" block large color="transparent" class="my-3">PUMP KITTENS VIEWER</v-btn>
+            <v-btn @click="currentTab = 'pumpkittens'" block large color="transparent" class="my-3">PUMPKITTENS VIEWER</v-btn>
             <v-btn @click="currentTab = 'attribute'" block large color="transparent" class="my-3">ATTRIBUTES</v-btn>
           </v-card-text>
         </v-card>
@@ -16,7 +16,7 @@
         <v-card color="transparent" class="mb-3">
           <v-card-text>
             <div class="text-h6">
-              <b>Pump Kittens</b> is a collection of <b>50 unique Pump Kittems</b> NFTs
+              <b>PumpKittens</b> is a collection of <b>50 unique PumpKittems</b> NFTs
               living on the <b>Fantom Network</b>
             </div>
             <ol class="list-box">
@@ -25,10 +25,10 @@
                 <v-btn @click="connectWallet" v-if="isMetaMaskInstalled && !isMetaMaskConnected" color="black" outlined elevation="2" class="ml-2" small>Connect</v-btn>
                 <v-btn @click="lockMetamask" v-if="isMetaMaskInstalled && isMetaMaskConnected" color="black" outlined elevation="2" class="ml-2" small>Connected</v-btn>
               </li>
-              <li class="my-1">Mint your Pump Kitten</li>
-              <li class="my-1">View your Pump Kittens! (You also can send Pump Kittens to other addresses)</li>
+              <li class="my-1">Mint your PumpKitten</li>
+              <li class="my-1">View your PumpKittens! (You also can send PumpKittens to other addresses)</li>
               <li class="my-1">
-                Once all Pump Kittens are minted you will be able to export them to any
+                Once all PumpKittens are minted you will be able to export them to any
                 <b>ERC-721 Standard</b> compatible marketplace running on Fantom
               </li>
             </ol>

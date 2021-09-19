@@ -1,0 +1,31 @@
+{
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/18.png",
+  "name": "Pumpkittens #18",
+  "attributes": [
+    {
+      "trait_type": "Uniqueness",
+      "value": "Necklace & bracelet"
+    },
+    {
+      "trait_type": "Dress",
+      "value": "Party"
+    }
+    ,
+    {
+      "trait_type": "Standout",
+      "value": "Glasses"
+    }
+    ,
+    {
+      "trait_type": "Earrings",
+      "value": "Golden flower"
+    }
+    ,
+    {
+      "trait_type": "Color",
+      "value": "Yellow"
+    }
+  ]
+}

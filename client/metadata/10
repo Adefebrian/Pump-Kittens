@@ -1,0 +1,26 @@
+{
+  "description": "",
+  "external_url": "",
+  "image": "https://gateway.pinata.cloud/ipfs/QmdgXgxBxZmCaRrYhmJZcNMgUxyewFXQJFvTrHMW98m2RW/10.png",
+  "name": "Pumpkittens #10",
+  "attributes": [
+    {
+      "trait_type": "Super rarity",
+      "value": "Elf Horns"
+    },
+    {
+      "trait_type": "Dress",
+      "value": "Christmas"
+    }
+    ,
+    {
+      "trait_type": "Standout",
+      "value": "Barefoot"
+    }
+    ,
+    {
+      "trait_type": "Color",
+      "value": "Orange"
+    }
+  ]
+}
