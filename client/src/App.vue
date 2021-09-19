@@ -4,7 +4,7 @@
             <v-container>
                 <v-row align="center">
                     <div class="d-flex align-center">
-                        <v-img :src="require('@/assets/pixelImage.png')" height="40px" contain width="40px"></v-img>
+                        <v-img :src="require('@/assets/favicon.png')" height="40px" contain width="40px"></v-img>
                         <span class="text-h6 font-weight-bold pl-2">MintApp</span>
                     </div>
                     <v-spacer></v-spacer>
