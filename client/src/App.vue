@@ -11,7 +11,7 @@
                     </div>
                     <v-spacer></v-spacer>
                     <v-btn text small><a href="https://pumpkitten.com" class="link">Home</a></v-btn>
-                    <v-btn text small><a href="" class="link">Help</a></v-btn>
+                    <v-btn text small><a href="https://twitter.com/pumpkittens" class="link">Help</a></v-btn>
                 </v-row>
             </v-container>
         </v-app-bar>
@@ -34,7 +34,7 @@
               </v-row>
               <v-row></v-row>
               <div class="text-center font-weight-bold black--text pt-5">
-                &copy; 2021 Pumpkittens.
+                &copy; 2021 Pumpkittens
               </div>
             </v-container>
         </v-footer>
