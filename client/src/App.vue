@@ -4,12 +4,14 @@
             <v-container>
                 <v-row align="center">
                     <div class="d-flex align-center">
+                        <a href="https://pumpkitten.com" class="link">
                         <v-img :src="require('@/assets/favicon.png')" height="40px" contain width="40px"></v-img>
+                        </a>
                         <span class="text-h6 font-weight-bold pl-2">Pumpkittens</span>
                     </div>
                     <v-spacer></v-spacer>
-                    <v-btn text small>Home</v-btn>
-                    <v-btn text small>Help</v-btn>
+                    <v-btn text small><a href="https://pumpkitten.com" class="link">Home</a></v-btn>
+                    <v-btn text small><a href="" class="link">Help</a></v-btn>
                 </v-row>
             </v-container>
         </v-app-bar>
@@ -21,13 +23,13 @@
               <div class="text-center font-weight-bold black--text pb-2">Our Socials</div>
               <v-row align="center" justify="center">
                 <v-btn icon class="ma-1">
-                  <v-icon>mdi-facebook</v-icon>
+                  <a href="" class="link"><v-icon>mdi-facebook</v-icon></a>
                 </v-btn>
                 <v-btn icon class="ma-1">
-                  <v-icon>mdi-github</v-icon>
+                  <a href="" class="link"><v-icon>mdi-github</v-icon></a>
                 </v-btn>
                 <v-btn icon class="ma-1">
-                  <v-icon>mdi-twitter</v-icon>
+                  <a href="https://twitter.com/Pumpkittens" class="link"><v-icon>mdi-twitter</v-icon></a>
                 </v-btn>
               </v-row>
               <v-row></v-row>
@@ -49,3 +51,11 @@
         }),
     };
 </script>
+
+<style scoped>
+.link{
+    color: rgb(70, 36, 70);
+    margin: 5px 0;
+    text-decoration: none;
+}
+</style>

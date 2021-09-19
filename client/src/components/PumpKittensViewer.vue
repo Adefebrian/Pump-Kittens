@@ -1,6 +1,6 @@
 <template>
   <div class="holder">
-    <div class="text-h6">Enter your wallet address to find your Pump Kittens.</div>
+    <div class="text-h6">Enter your wallet address to find your PumpKittens.</div>
     <v-text-field v-model="account" class="walletForm" type="text" placeholder="Wallet Address"></v-text-field>
     <v-dialog
       v-model="dialog"
@@ -131,7 +131,7 @@ export default {
       padding: 5px 10px;
       font-size: 12px;
       color:black;
-      height:400px;
+      height:360px;
   }
 
   .tokenPrice {

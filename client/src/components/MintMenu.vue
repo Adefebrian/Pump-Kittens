@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="text-center text-h5 font-weight-bold">{{totalSupply}} / 50 PumpKittens Minted</div>
+    <div class="text-center text-h5 font-weight-bold">{{totalSupply}} / 4 PumpKittens Minted</div>
     <v-row class="my-7 mx-0">
       <v-col cols="4" lg="2" md="2" sm="3" class="pa-1" v-for="(profile,idx) in profiles"
             :key="idx">
@@ -30,14 +30,14 @@ export default {
         {url: require("../images/2.png")},
         {url: require("../images/3.png")},
         {url: require("../images/4.png")},
-        {url: require("../images/5.png")},
+/*        {url: require("../images/5.png")},
         {url: require("../images/6.png")},
         {url: require("../images/7.png")},
         {url: require("../images/8.png")},
         {url: require("../images/9.png")},
         {url: require("../images/10.png")},
         {url: require("../images/11.png")},
-        {url: require("../images/12.png")},
+        {url: require("../images/12.png")},*/
       ],
     };
   },
