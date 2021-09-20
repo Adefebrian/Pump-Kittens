@@ -60,6 +60,6 @@
 }
 
 .header {
-    background: rgb(45 158 220 / 14%);
+    background-image: linear-gradient( 109.6deg, rgb(13 134 138) 11.2%, rgb(55 161 178) 91.1% );
 }
 </style>
