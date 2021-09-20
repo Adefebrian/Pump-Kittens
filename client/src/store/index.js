@@ -8,8 +8,10 @@ import abiPUMPKITTENS from '@/abi/pumpkittens.json'
 BigNumber.config({ EXPONENTIAL_AT: 100 })
 
 const ADDR_OWNER = ''
-const ADDR_TOKEN_PUMPKITTENS = '0x33F9E448f1BAE5507B5b36D477b25344e84a4e36'
+// const ADDR_TOKEN_PUMPKITTENS = '0x33F9E448f1BAE5507B5b36D477b25344e84a4e36'
+const ADDR_TOKEN_PUMPKITTENS = '0x57B615728690ed99AccA3e49665c2EBdAa3AB4e8'
 const MAXIMUM_MINT_TOKEN = 50;
+const MAXIMUM_MINT_TOKEN_COUNT_FOR_ACCOUNT = 3;
 
 Vue.use(Vuex)
 
@@ -43,7 +45,7 @@ export default new Vuex.Store({
         state.contracts.tokenPumpKittens = new window.web3.eth.Contract(abiPUMPKITTENS, ADDR_TOKEN_PUMPKITTENS);
     },
     set_account(state,account) {
-        state.account = account      
+        state.account = account
     },
     show_info(state,message) {
         state.messageContent = message
@@ -62,7 +64,6 @@ export default new Vuex.Store({
         state.messageType = 'warning'
     },
     read_pumpkittens(state) {
-      console.log(423424234);
         state.contracts.tokenPumpKittens.methods.totalSupply().call().then((ret)=>{
             state.pumpkittens.totalSupply = BigNumber(ret);
             }).catch((error)=>{
@@ -208,13 +209,27 @@ export default new Vuex.Store({
           commit('show_warning', 'No More Tokens!');
           return;
         }
-        state.contracts.tokenPumpKittens.methods.buyPumpKittens().send({
+
+        state.contracts.tokenPumpKittens.methods.getTokenCount().call({
+          from: state.account.address
+        }).then((ret)=>{
+          if (ret == MAXIMUM_MINT_TOKEN_COUNT_FOR_ACCOUNT)
+          {
+            commit('show_warning', 'Too Many Tokens At Your Wallet!');
+            return;
+          }
+
+          state.contracts.tokenPumpKittens.methods.buyPumpkittens().send({
             from: state.account.address,
             value:BigNumber(state.pumpkittens.price).integerValue().toString()
           }).then(()=>{
             commit('show_success', 'Success!');
             commit('read_pumpkittens');
-        })
+          })
+
+        }).catch((error)=>{
+          console.error("getTokenCount()",error)
+        });
     },
     transferToken({state,commit}, params) {
         if (!window.web3.utils.isAddress(params.to))

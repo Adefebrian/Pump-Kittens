@@ -64,7 +64,6 @@ export default {
       mint() {                
           this.$store.dispatch('mint')              
       },
-
   }
 };
 </script>
