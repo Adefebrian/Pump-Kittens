@@ -12,7 +12,7 @@
     </v-row>
     <div class="text-center">
       <v-btn @click="mint" color="black" outlined elevation="4">MINT MY PUMPKITTEN!</v-btn>
-      <div class="hilight">price : {{nftPrice.toFormat(3)}} FTM</div>
+      <div class="hilight">Price : {{nftPrice.toFormat(3)}} FTM</div>
     </div>
 
   </div>
