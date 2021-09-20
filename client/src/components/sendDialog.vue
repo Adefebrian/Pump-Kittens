@@ -3,7 +3,7 @@
         <v-btn color="black" dark @click.stop="dialog = true"  outlined elevation="4" class="action" x-small>Send</v-btn>
         <v-dialog v-model="dialog" max-width="450">
             <v-card>
-                <v-toolbar color="primary" dark>Transfering Pump Kitten</v-toolbar>
+                <v-toolbar color="primary" dark>Send your Pumpkitten to:</v-toolbar>
                 <v-col sm="15">
                    <v-text-field v-model="recipientAddress" placeholder="To : Enter recipients address">
                     </v-text-field>
