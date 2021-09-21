@@ -9,7 +9,7 @@ BigNumber.config({ EXPONENTIAL_AT: 100 })
 
 const ADDR_OWNER = ''
 // const ADDR_TOKEN_PUMPKITTENS = '0x33F9E448f1BAE5507B5b36D477b25344e84a4e36'
-const ADDR_TOKEN_PUMPKITTENS = '0xbd78Ca5eb0c04A172dC1744446DEfd9050D9DE58'
+const ADDR_TOKEN_PUMPKITTENS = '0x8266Bd2D4A3F193D647d498bD4Da0345Aa13dB13'
 const MAXIMUM_MINT_TOKEN = 50;
 const MAXIMUM_MINT_TOKEN_COUNT_FOR_ACCOUNT = 3;
 
@@ -87,6 +87,7 @@ export default new Vuex.Store({
           else
           {
             state.contracts.tokenPumpKittens.methods.getPrice().call().then((ret)=>{
+              console.log(ret);
               state.pumpkittens.price = BigNumber(ret);
             }).catch((error)=>{
               console.error("tokenBQB.totalSupply",error)
