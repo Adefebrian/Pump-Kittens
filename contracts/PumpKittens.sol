@@ -40,6 +40,7 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     uint256 reservedPeriod = 60 * 60;                   // 60 minutes
     uint256 mintReservedTokenPeriod = 24 * 3600;        // 24 hours
     uint256 initialTime;
+    bool comparedReservedTokenCount = false
 
     constructor() ERC721PresetMinterPauserAutoId
         ("Pumpkittens", "PK", "https://gateway.pinata.cloud/ipfs/QmUV2B2RrxAwX4Hx4Y2mr9HVnAVoEgvQVtmfbbqgrcfiFJ/") 
@@ -54,7 +55,7 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
         require(msg.value == currentPrice);
         require(_tokenIdTracker.current() <= max_Pumpkittens, "Too Many Tokens");
         require(_tokenCountOfAccount[_msgSender()] < max_TokenCountOfAccount, "Too Many Tokens For a Account");
-        require(!((block.timestamp - initialTime) < reservedPeriod && !isReservedAddress(_msgSender())), "Not right to mint now");
+        require(!((block.timestamp - initialTime) < mintReservedTokenPeriod && !isReservedAddress(_msgSender())), "Not right to mint now");
         
         if (isReservedAddress(_msgSender()) && (block.timestamp - initialTime) < mintReservedTokenPeriod)
         {
@@ -124,11 +125,26 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
         _tokenStatus[ _reservedInfo[account].tokenId] = Status.Pending;
     }
     
-    function isReservedAddress(address account) public returns (bool) {
+    function getCountofReservedToken() public view returns (uint) {
+        return currenttokenId;
+    }
+    
+    function getReservedTokenPrice(address account) public view returns (uint256) {
+        return _reservedInfo[account].price;
+    }
+    
+    function isReservedAddress(address account) public view returns (bool) {
         if (_reservedInfo[account].tokenId > 0)
             return true;
         
         return false;
+    }
+    
+    function isReservePeriod() public view returns (bool) {
+        if (block.timestamp - initialTime > mintReservedTokenPeriod)
+            return false;
+        
+        return true;
     }
     
     function setPrice(uint _price) public onlyOwner() {
@@ -136,6 +152,12 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     }
     
     function getPrice() public view returns(uint) {
+        if (_tokenIdTracker < currenttokenId 
+            && block.timestamp - initialTime) > mintReservedTokenPeriod 
+            && !comparedReservedTokenCount)
+        {
+            comparedReservedTokenCount = true;
+        }
         return currentPrice;
     }
     

@@ -58,7 +58,7 @@ export default {
       },
   },
   mounted() {
-      this.$store.commit('read_pumpkittens')
+      this.$store.commit('read_pumpkittens');
   },
   methods: {
       mint() {                

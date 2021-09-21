@@ -8,8 +8,8 @@ import abiPUMPKITTENS from '@/abi/pumpkittens.json'
 BigNumber.config({ EXPONENTIAL_AT: 100 })
 
 const ADDR_OWNER = ''
-const ADDR_TOKEN_PUMPKITTENS = '0x33F9E448f1BAE5507B5b36D477b25344e84a4e36'
-// const ADDR_TOKEN_PUMPKITTENS = '0x57B615728690ed99AccA3e49665c2EBdAa3AB4e8'
+// const ADDR_TOKEN_PUMPKITTENS = '0x33F9E448f1BAE5507B5b36D477b25344e84a4e36'
+const ADDR_TOKEN_PUMPKITTENS = '0xbd78Ca5eb0c04A172dC1744446DEfd9050D9DE58'
 const MAXIMUM_MINT_TOKEN = 50;
 const MAXIMUM_MINT_TOKEN_COUNT_FOR_ACCOUNT = 3;
 
@@ -69,8 +69,29 @@ export default new Vuex.Store({
             }).catch((error)=>{
             console.error("tokenBQB.totalSupply",error)
         });
-        state.contracts.tokenPumpKittens.methods.getPrice().call().then((ret)=>{
-          state.pumpkittens.price = BigNumber(ret);
+
+        state.contracts.tokenPumpKittens.methods.isReservePeriod().call().then((ret)=>{
+          if (ret)
+          {
+            if (state.account != null)
+            {
+              state.contracts.tokenPumpKittens.methods.getReservedTokenPrice(state.account.address).call().then((ret)=>{
+                state.pumpkittens.price = BigNumber(ret);
+              }).catch((error)=>{
+                console.error("tokenBQB.totalSupply",error)
+              });
+            }
+            else
+              state.pumpkittens.price = BigNumber(0);
+          }
+          else
+          {
+            state.contracts.tokenPumpKittens.methods.getPrice().call().then((ret)=>{
+              state.pumpkittens.price = BigNumber(ret);
+            }).catch((error)=>{
+              console.error("tokenBQB.totalSupply",error)
+            });
+          }
         }).catch((error)=>{
           console.error("tokenBQB.totalSupply",error)
         });
@@ -207,6 +228,12 @@ export default new Vuex.Store({
         if (state.pumpkittens.totalSupply == MAXIMUM_MINT_TOKEN)
         {
           commit('show_warning', 'No More Tokens!');
+          return;
+        }
+
+        if (state.pumpkittens.price == 0)
+        {
+          commit('show_warning', 'You can not mint now!');
           return;
         }
 
