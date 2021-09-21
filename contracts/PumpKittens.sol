@@ -37,8 +37,8 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     
     mapping(address => ReservedToken) private _reservedInfo;
     uint private currenttokenId = 0;
-    uint256 private reservedPeriod = 60 * 60;                       // 60 minutes
-    uint256 private mintReservedTokenPeriod = 24 * 3600;            // 24 hours
+    uint256 private reservedPeriod = 10 * 60;  // 60 * 60                                 // 10 minutes (60 minutes)
+    uint256 private mintReservedTokenPeriod = 15 * 60; //24 * 3600;             // 15 minutes (24 hours)
     uint256 public initialTime;
     bool public comparedReservedTokenCount = false;
 
