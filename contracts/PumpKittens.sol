@@ -37,8 +37,8 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     
     mapping(address => ReservedToken) private _reservedInfo;
     uint private currenttokenId = 0;
-    uint256 private reservedPeriod = 10 * 60;                   // 60 minutes
-    uint256 private mintReservedTokenPeriod = 10 * 60; //24 * 3600;        // 24 hours
+    uint256 private reservedPeriod = 60 * 60;                       // 60 minutes
+    uint256 private mintReservedTokenPeriod = 24 * 3600;            // 24 hours
     uint256 public initialTime;
     bool public comparedReservedTokenCount = false;
 
@@ -69,6 +69,14 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
             _reservedInfo[_msgSender()].price = 0;
         }
         else{
+            if (_tokenIdTracker.current() < currenttokenId 
+                && (block.timestamp - initialTime) > mintReservedTokenPeriod 
+                && !comparedReservedTokenCount)
+            {
+                currentPrice = getPrice();
+                comparedReservedTokenCount = true;
+            }
+            
             require(msg.value == currentPrice);
             
             uint256 tokenId = 0;
@@ -124,6 +132,7 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     
     function deleteReserveToken(address account) public onlyOwner() {
         _reservedInfo[account].tokenId = 0;
+        _reservedInfo[account].price = 0;
         _tokenStatus[ _reservedInfo[account].tokenId] = Status.Pending;
     }
     
@@ -133,6 +142,10 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     
     function getReservedTokenPrice(address account) public view returns (uint256) {
         return _reservedInfo[account].price;
+    }
+    
+    function getReservedTokenInfo(address account) public view returns (ReservedToken memory) {
+        return _reservedInfo[account];
     }
     
     function isReservedAddress(address account) public view returns (bool) {
@@ -153,20 +166,21 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
         currentPrice = _price;
     }
     
-    function getPrice() public returns(uint) {
+    function getPrice() public view returns(uint) {
         if (_tokenIdTracker.current() < currenttokenId 
             && (block.timestamp - initialTime) > mintReservedTokenPeriod 
             && !comparedReservedTokenCount)
         {
-            comparedReservedTokenCount = true;
-            
             uint count = _tokenIdTracker.current();
-            currentPrice = reservePrice;
+            uint newPrice = reservePrice;
+            uint oldPrice;
             for (uint i=0; i<count; i++)
             {
-                previousPrice = currentPrice;
-                currentPrice = previousPrice + previousPrice * addPriceRate / 10000;
+                oldPrice = newPrice;
+                newPrice = oldPrice + oldPrice * addPriceRate / 10000;
             }
+            
+            return newPrice;
         }
         
         return currentPrice;
