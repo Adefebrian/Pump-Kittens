@@ -105,7 +105,8 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     }
     
     function addReserveToken(address account) public onlyOwner() {
-        require((block.timestamp - initialTime) <= reservedPeriod, "End reserve time");
+        require((block.timestamp - initialTime) < reservedPeriod, "End time");
+        require(_reservedInfo[account].tokenId == 0, "Too Many Tokens");
         
         _reservedInfo[account].price = currentPrice;
         
@@ -116,6 +117,11 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
         
         previousPrice = currentPrice;
         currentPrice = previousPrice + previousPrice * addPriceRate / 10000;
+    }
+    
+    function deleteReserveToken(address account) public onlyOwner() {
+        _reservedInfo[account].tokenId = 0;
+        _tokenStatus[ _reservedInfo[account].tokenId] = Status.Pending;
     }
     
     function isReservedAddress(address account) public returns (bool) {
@@ -185,5 +191,13 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     function setTransferTaxRate(uint _transferTaxRate) public onlyOwner {
         require(_transferTaxRate > 0, "Cannot be zero value");
         transferTaxRate = _transferTaxRate;
-    } 
+    }
+    
+    function setReservePeriod(uint _period) public onlyOwner {
+        reservedPeriod = _period;
+    }
+    
+    function setMintReservedTokenPeriod(uint _period) public onlyOwner {
+        mintReservedTokenPeriod = _period;
+    }
 }
