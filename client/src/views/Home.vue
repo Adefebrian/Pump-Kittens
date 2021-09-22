@@ -16,7 +16,7 @@
         <v-card color="transparent" class="mb-3">
           <v-card-text>
             <div class="text-h6">
-              <b>'Pumpkittens'</b> is a collection of <b>50 rare and unique Pumpkitten</b> NFTs
+              <b>'Pumpkittens'</b> is a collection of <b>100 rare and unique Pumpkitten</b> NFTs
               living on the <b>Fantom blockchain.</b>
             </div>
             <ol class="list-box">

@@ -32,7 +32,7 @@ export default {
       attributes: [
         {
           category: "Super rarity",
-          total: 50,
+          total: 100,
           items: [
             {
               name: "Covid Mask",
@@ -86,7 +86,7 @@ export default {
         },
         {
           category: "Uniqueness",
-          total: 50,
+          total: 100,
           items: [
             {
               name: "Bracelet",
@@ -189,7 +189,7 @@ export default {
         },
        {
           category: "Dress",
-          total: 50,
+          total: 100,
           items: [
             {
               name: "Beach",
@@ -281,7 +281,7 @@ export default {
         },
       {
           category: "Standout",
-          total: 50,
+          total: 100,
           items: [
             {
               name: "Barefoot",
@@ -421,7 +421,7 @@ export default {
         },
         {
           category: "Earrings",
-          total: 50,
+          total: 100,
           items: [
             {
               name: "Double gold",
@@ -499,7 +499,7 @@ export default {
         },
         {
           category: "Color",
-          total: 50,
+          total: 100,
           items: [
             {
               name: "Black",
