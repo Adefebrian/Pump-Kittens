@@ -7,11 +7,11 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     using Counters for Counters.Counter;
     
-    uint private reservePrice = 1 ether;
+    uint private reservePrice = 150 ether;
     uint public currentPrice;
     uint public previousPrice;
     uint private addPriceRate = 300;             // 3%
-    uint private max_Pumpkittens = 4;
+    uint private max_Pumpkittens = 100;
     uint256 private max_TokenCountOfAccount = 3;
     
     uint private transferTaxRate = 100;          // 1%
@@ -37,13 +37,13 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     
     mapping(address => ReservedToken) private _reservedInfo;
     uint private currenttokenId = 0;
-    uint256 private reservedPeriod = 10 * 60;  // 60 * 60                                 // 10 minutes (60 minutes)
-    uint256 private mintReservedTokenPeriod = 15 * 60; //24 * 3600;             // 15 minutes (24 hours)
+    uint256 private reservedPeriod = 60 * 60;                           // 60 minutes
+    uint256 private mintReservedTokenPeriod = 24 * 3600;                // 24 hours
     uint256 public initialTime;
     bool public comparedReservedTokenCount = false;
 
     constructor() ERC721PresetMinterPauserAutoId
-        ("Pumpkittens", "PK", "https://gateway.pinata.cloud/ipfs/QmUV2B2RrxAwX4Hx4Y2mr9HVnAVoEgvQVtmfbbqgrcfiFJ/") 
+        ("Pumpkittens", "PK", "https://gateway.pinata.cloud/ipfs/QmeEGn4g8sFxLp6fmz9fHmWbWpRPBcHLozP317Q18jGGXT/") 
     {
         currentPrice = reservePrice;
         devAccount = _msgSender();
