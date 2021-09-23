@@ -70,10 +70,12 @@ export default {
 
 <style>
     .hilight {
-        color:#ffff00;
+        color:#000000;
         margin-left: 10px;
+        margin-top: 5px;
         font-family: sans-serif;
         font-size: 14px;
+        font-weight: bold;
     }
 
     .my-7 {

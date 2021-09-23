@@ -8,9 +8,9 @@ import abiPUMPKITTENS from '@/abi/pumpkittens.json'
 BigNumber.config({ EXPONENTIAL_AT: 100 })
 
 const ADDR_OWNER = ''
-const ADDR_TOKEN_PUMPKITTENS = '0x80592f85E35beCD880673633D435c706C7aA393E'
+const ADDR_TOKEN_PUMPKITTENS = '0xD4BA8186278b15F7C1F7C6aa73d586dd8091B77c'
 const MAXIMUM_MINT_TOKEN = 4;
-const MAXIMUM_MINT_TOKEN_COUNT_FOR_ACCOUNT = 3;
+const MAXIMUM_MINT_TOKEN_COUNT_FOR_ACCOUNT = 1;
 
 Vue.use(Vuex)
 
@@ -86,7 +86,6 @@ export default new Vuex.Store({
           else
           {
             state.contracts.tokenPumpKittens.methods.getPrice().call().then((ret)=>{
-              console.log(ret);
               state.pumpkittens.price = BigNumber(ret);
             }).catch((error)=>{
               console.error("tokenBQB.totalSupply",error)
@@ -258,21 +257,37 @@ export default new Vuex.Store({
           console.error("getTokenCount()",error)
         });
     },
-    transferToken({state,commit}, params) {
+    async transferToken({state,commit}, params) {
         if (!window.web3.utils.isAddress(params.to))
         {
             commit('show_warning', 'Address Error!');
             return false;
         }
 
-        state.contracts.tokenPumpKittens.methods.safeTransferFrom(state.account.address, params.to, params.tokenID)
-        .send({
-            from: state.account.address
-          }).then(()=>{
-            commit('show_success', 'Success!');
+        if (params.from == params.to)
+        {
+            commit('show_warning', 'Recipient Address can not be the same as the Spender Address!');
+            return false;
+        }
 
-            return true;
-        })
+        state.contracts.tokenPumpKittens.methods.ownerOf(params.tokenID).call().then((ret)=>{
+          if (String(ret).toLowerCase() != String(state.account.address).toLowerCase())
+          {
+            commit('show_warning', 'You are not the owner of this token!');
+            return false;           
+          }
+          else
+          {
+            state.contracts.tokenPumpKittens.methods.safeTransferFrom(params.from, params.to, params.tokenID)
+            .send({
+                from: state.account.address
+              }).then(()=>{
+                commit('show_success', 'Success!');
+            })
+          }
+        }).catch((error)=>{
+          console.error("Pumpkitten.ownerOf",error)
+        });
     },
   }
 })

@@ -27,7 +27,7 @@
     <v-row class="my-7 mx-0" v-if="this.$store.state.searchResult">
       <v-col cols="4" lg="3" md="2" sm="3" class="pa-1" v-for="(imageURI,idx) in this.$store.state.pumpkittens.imageURIs"
           :key="idx">
-          <SendDialog :id="tokenId(idx)" :account="searchAccount()" />
+          <SendDialog :id="tokenId(idx)" :account="searchAccount()" :name="tokenName(idx)" />
           <v-img
               :src="imageURI"
               contain
@@ -131,7 +131,7 @@ export default {
       padding: 5px 10px;
       font-size: 12px;
       color:black;
-      height:360px;
+      height:350px;
   }
 
   .tokenPrice {

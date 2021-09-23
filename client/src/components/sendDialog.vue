@@ -4,6 +4,7 @@
         <v-dialog v-model="dialog" max-width="450">
             <v-card>
                 <v-toolbar color="primary" dark>Send your Pumpkitten to:</v-toolbar>
+                <div class="text-h10 my-3 mx-3">{{this.name}}</div>
                 <v-col sm="15">
                    <v-text-field v-model="recipientAddress" placeholder="To : Enter recipients address">
                     </v-text-field>
@@ -33,6 +34,7 @@
     },
     props: {
         id: {type: String},
+        name: {type: String},
         account: null
     },
     mounted() {
@@ -51,6 +53,7 @@
         transferToken() {         
             if (this.$store.dispatch('transferToken', {
                 tokenID:this.id,
+                from:this.account,
                 to:this.recipientAddress
             }))
             this.transfered = true;

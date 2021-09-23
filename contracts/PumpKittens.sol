@@ -8,14 +8,14 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     using Counters for Counters.Counter;
     
     uint private reservePrice = 1 ether;
-    uint public currentPrice;
-    uint public previousPrice;
-    uint private addPriceRate = 300;             // 3%
+    uint private currentPrice;
+    uint private previousPrice;
+    uint private addPriceRate = 150;             // 1.5%
     uint private max_Pumpkittens = 4;
-    uint256 private max_TokenCountOfAccount = 3;
+    uint256 private max_TokenCountOfAccount = 1;
     
     uint private transferTaxRate = 100;          // 1%
-    bool private enabletransferTax = false;
+    bool private enabletransferTax = true;
     
     address private devAccount;
     Counters.Counter private _tokenIdTracker;
@@ -26,9 +26,9 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
         Minted
     }
     
-    mapping(uint => Status) public _tokenStatus;
-    mapping(uint => uint256) public _tokenPrice;
-    mapping(address => uint) public _tokenCountOfAccount;
+    mapping(uint => Status) private _tokenStatus;
+    mapping(uint => uint256) private _tokenPrice;
+    mapping(address => uint) private _tokenCountOfAccount;
     
     struct ReservedToken {
         uint256 tokenId;
@@ -36,11 +36,10 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     }
     
     mapping(address => ReservedToken) private _reservedInfo;
-    uint private currenttokenId = 0;
-    uint256 private reservedPeriod = 20 * 60; //60 * 60;                           // 60 minutes
-    uint256 private mintReservedTokenPeriod = 30 * 60; //24 * 3600;                // 24 hours
-    uint256 public initialTime;
-    bool public comparedReservedTokenCount = false;
+    uint private currentReservedTokenId = 0;
+    uint256 private reservedPeriod = 10 * 60; //60 * 60;                           // 60 minutes
+    uint256 private mintReservedTokenPeriod =10 * 60;                // 24 hours
+    uint256 private initialTime;
 
     constructor() ERC721PresetMinterPauserAutoId
 //        ("Pumpkittens", "PK", "https://gateway.pinata.cloud/ipfs/QmeEGn4g8sFxLp6fmz9fHmWbWpRPBcHLozP317Q18jGGXT/") 
@@ -51,14 +50,16 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
         initialTime = block.timestamp;
     }
     
-    function buyPumpkittens() public payable{
+    function buyPumpkittens() public payable {
         
         require(_tokenIdTracker.current() <= max_Pumpkittens, "Too Many Tokens");
         require(_tokenCountOfAccount[_msgSender()] < max_TokenCountOfAccount, "Too Many Tokens For a Account");
         require(!((block.timestamp - initialTime) < mintReservedTokenPeriod && !isReservedAddress(_msgSender())), "Not right to mint now");
         
-        if ((block.timestamp - initialTime) < mintReservedTokenPeriod)
+        if ((block.timestamp - initialTime) <= mintReservedTokenPeriod)
         {
+             require(_tokenStatus[_reservedInfo[_msgSender()].tokenId] != Status.Minted, "Not right to mint again");
+             
             _tokenIdTracker.increment();
             
             _mint(_msgSender(), _reservedInfo[_msgSender()].tokenId);
@@ -66,44 +67,41 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
             _tokenCountOfAccount[_msgSender()] ++;
             
             _tokenStatus[_reservedInfo[_msgSender()].tokenId] = Status.Minted;
-            _reservedInfo[_msgSender()].tokenId = 0;
+            _tokenPrice[_reservedInfo[_msgSender()].tokenId] = _reservedInfo[_msgSender()].price;
+                        
             _reservedInfo[_msgSender()].price = 0;
         }
         else{
-            if (_tokenIdTracker.current() < currenttokenId 
-                && (block.timestamp - initialTime) > mintReservedTokenPeriod 
-                && !comparedReservedTokenCount)
+            uint256 tokenId = 0;
+            
+            if (_tokenIdTracker.current() < currentReservedTokenId)
             {
                 currentPrice = getPrice();
-                comparedReservedTokenCount = true;
+                
+                for (uint i=1; i<currentReservedTokenId + 1; i++)
+                {
+                    if (_tokenStatus[i] != Status.Minted)
+                    {
+                        tokenId = i;
+                        break;
+                    }
+                }
+            }
+            else{
+                _tokenIdTracker.increment();
+                
+                tokenId = _tokenIdTracker.current();
             }
             
             require(msg.value == currentPrice);
             
-            uint256 tokenId = 0;
-            _tokenStatus[tokenId] = Status.Minted;
-            
-            uint index = 0;
-            while (_tokenStatus[tokenId] == Status.Minted || _tokenStatus[tokenId] == Status.Reserved)
-            {
-                tokenId = uint256(keccak256(abi.encodePacked(block.difficulty, block.timestamp, _tokenIdTracker.current() + index))) % max_Pumpkittens + 1;
-                
-                if (_tokenStatus[tokenId] == Status.Reserved && (block.timestamp - initialTime) > mintReservedTokenPeriod)
-                {
-                    _tokenStatus[tokenId] = Status.Pending;
-                }
-                
-                index ++;
-            }
-            
-            _tokenIdTracker.increment();
-            
             _mint(_msgSender(), tokenId);
-            _tokenCountOfAccount[_msgSender()] ++;
             
             _tokenStatus[tokenId] = Status.Minted;
             _tokenPrice[tokenId] = currentPrice;
             
+            _tokenCountOfAccount[_msgSender()] ++;
+                        
             previousPrice = currentPrice;
             currentPrice = previousPrice + previousPrice * addPriceRate / 10000;
         }
@@ -119,13 +117,14 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     function addReserveToken(address account) public onlyOwner() {
         require((block.timestamp - initialTime) < reservedPeriod, "End time");
         require(_reservedInfo[account].tokenId == 0, "Too Many Tokens");
+        require(currentReservedTokenId < max_Pumpkittens, "Too Many Tokens");
         
         _reservedInfo[account].price = currentPrice;
         
-        currenttokenId++;
-        _reservedInfo[account].tokenId = currenttokenId;
+        currentReservedTokenId++;
+        _reservedInfo[account].tokenId = currentReservedTokenId;
         
-        _tokenStatus[currenttokenId] = Status.Reserved;
+        _tokenStatus[currentReservedTokenId] = Status.Reserved;
         
         previousPrice = currentPrice;
         currentPrice = previousPrice + previousPrice * addPriceRate / 10000;
@@ -135,10 +134,6 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
         _reservedInfo[account].tokenId = 0;
         _reservedInfo[account].price = 0;
         _tokenStatus[ _reservedInfo[account].tokenId] = Status.Pending;
-    }
-    
-    function getCountofReservedToken() public view returns (uint) {
-        return currenttokenId;
     }
     
     function getReservedTokenPrice(address account) public view returns (uint256) {
@@ -168,9 +163,11 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     }
     
     function getPrice() public view returns(uint) {
-        if (_tokenIdTracker.current() < currenttokenId 
-            && (block.timestamp - initialTime) > mintReservedTokenPeriod 
-            && !comparedReservedTokenCount)
+        if (_tokenIdTracker.current() == max_Pumpkittens)
+            return 0;
+            
+        if (_tokenIdTracker.current() < currentReservedTokenId 
+            && (block.timestamp - initialTime) > mintReservedTokenPeriod)
         {
             uint count = _tokenIdTracker.current();
             uint newPrice = reservePrice;
