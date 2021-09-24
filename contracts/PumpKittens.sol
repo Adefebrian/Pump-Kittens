@@ -86,6 +86,7 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
                         break;
                     }
                 }
+                _tokenIdTracker.increment();
             }
             else{
                 _tokenIdTracker.increment();

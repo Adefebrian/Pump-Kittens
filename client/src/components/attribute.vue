@@ -105,23 +105,24 @@ export default {
               ],
             },
             {
-              name: "Christmas",
-              count: 1,
-              images: [
-                require("@/images/1.png"),
-              ],
-            },
-            {
               name: "Glasses",
               count: 7,
               images: [
+                require("@/images/6.png"),
+                require("@/images/8.png"),
+                require("@/images/12.png"),
+                require("@/images/28.png"),
+                require("@/images/43.png"),
                 require("@/images/51.png"),
                 require("@/images/55.png"),
                 require("@/images/56.png"),
-                require("@/images/87.png"),
+/*                require("@/images/87.png"),
                 require("@/images/89.png"),
                 require("@/images/99.png"),
                 require("@/images/100.png"),
+                require("@/images/77.png"),
+                require("@/images/82.png"),
+                require("@/images/61.png"),*/
               ],
             },
            {
@@ -339,20 +340,6 @@ export default {
                 require("@/images/92.png"),
                 require("@/images/62.png"),
                 require("@/images/10.png"),
-              ],
-            },
-            {
-              name: "Glasses",
-              count: 16,
-              images: [
-                require("@/images/28.png"),
-                require("@/images/6.png"),
-                require("@/images/43.png"),
-                require("@/images/8.png"),
-                require("@/images/77.png"),
-                require("@/images/82.png"),
-                require("@/images/12.png"),
-                require("@/images/61.png"),
               ],
             },
             {
