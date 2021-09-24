@@ -29,7 +29,7 @@
                   <a href="" class="link"><v-icon>mdi-github</v-icon></a>
                 </v-btn>
                 <v-btn icon class="ma-1">
-                  <a href="https://twitter.com/Pumpkittens" class="link"><v-icon>mdi-twitter</v-icon></a>
+                  <a href="https://discord.gg/Gj7JqN2mXZ" class="link"><v-icon>mdi-discord</v-icon></a>
                 </v-btn>
               </v-row>
               <v-row></v-row>
