@@ -12,12 +12,12 @@
           <div>{{ cat.count }} <span>/</span> {{ attr.total }}</div>
         </div>
         <div class="d-flex flex-nowrap imgRow">
-          <img
+<!--          <img
             v-for="(img, i_idx) in cat.images"
             :key="'img' + i_idx"
             :src="img"
             class="img-attrb"
-          />
+          />-->
         </div>
       </div>
     </div>

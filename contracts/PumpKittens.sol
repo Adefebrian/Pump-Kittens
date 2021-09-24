@@ -7,11 +7,11 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     using Counters for Counters.Counter;
     
-    uint private reservePrice = 1 ether;
+    uint private reservePrice = 200 ether;
     uint private currentPrice;
     uint private previousPrice;
     uint private addPriceRate = 150;             // 1.5%
-    uint private max_Pumpkittens = 4;
+    uint private max_Pumpkittens = 100;
     uint256 private max_TokenCountOfAccount = 1;
     
     uint private transferTaxRate = 100;          // 1%
@@ -37,13 +37,12 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
     
     mapping(address => ReservedToken) private _reservedInfo;
     uint private currentReservedTokenId = 0;
-    uint256 private reservedPeriod = 10 * 60; //60 * 60;                           // 60 minutes
-    uint256 private mintReservedTokenPeriod =10 * 60;                // 24 hours
+    uint256 private reservedPeriod = 12 * 3600;                 // 12 hours
+    uint256 private mintReservedTokenPeriod =12 * 3600;         // 12 hours
     uint256 private initialTime;
 
     constructor() ERC721PresetMinterPauserAutoId
-//        ("Pumpkittens", "PK", "https://gateway.pinata.cloud/ipfs/QmeEGn4g8sFxLp6fmz9fHmWbWpRPBcHLozP317Q18jGGXT/") 
-        ("Pumpkittens", "PK", "https://gateway.pinata.cloud/ipfs/QmUV2B2RrxAwX4Hx4Y2mr9HVnAVoEgvQVtmfbbqgrcfiFJ/") 
+        ("Pumpkittens", "PK", "https://gateway.pinata.cloud/ipfs/QmdrB5UXmyudAN3pchwvPWohKPT81Biq3Amxj6u7dSKQfE/") 
     {
         currentPrice = reservePrice;
         devAccount = _msgSender();
@@ -170,16 +169,20 @@ contract Pumpkittens is ERC721PresetMinterPauserAutoId, Ownable {
         if (_tokenIdTracker.current() < currentReservedTokenId 
             && (block.timestamp - initialTime) > mintReservedTokenPeriod)
         {
-            uint count = _tokenIdTracker.current();
             uint newPrice = reservePrice;
             uint oldPrice;
-            for (uint i=0; i<count; i++)
+            
+            for (uint i=1; i<currentReservedTokenId; i++)
             {
+                if (_tokenStatus[i] != Status.Minted)
+                   break;
+                   
                 oldPrice = newPrice;
                 newPrice = oldPrice + oldPrice * addPriceRate / 10000;
             }
             
             return newPrice;
+            
         }
         
         return currentPrice;

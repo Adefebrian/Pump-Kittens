@@ -8,8 +8,8 @@ import abiPUMPKITTENS from '@/abi/pumpkittens.json'
 BigNumber.config({ EXPONENTIAL_AT: 100 })
 
 const ADDR_OWNER = ''
-const ADDR_TOKEN_PUMPKITTENS = '0xd95e424EdaF655051a0786B0Da4dc0a33301a8D4'
-const MAXIMUM_MINT_TOKEN = 4;
+const ADDR_TOKEN_PUMPKITTENS = '0xa3E30c98a3b7fBf5A23E23B4df5674411d626E1C'
+const MAXIMUM_MINT_TOKEN = 100;
 const MAXIMUM_MINT_TOKEN_COUNT_FOR_ACCOUNT = 1;
 
 Vue.use(Vuex)
@@ -103,7 +103,7 @@ export default new Vuex.Store({
         })
     },
   },
-  actions: {
+  actions: {/*
     connect({commit}) {
       window.ethereum.request({ 
           method: 'eth_requestAccounts' 
@@ -133,6 +133,61 @@ export default new Vuex.Store({
                     chainName: 'FantomNetwork',
                     rpcUrls: ['https://rpc.testnet.fantom.network'],
                     blockExplorerUrls: ['https://testnet.ftmscan.com'],
+                    nativeCurrency: {
+                      name: 'Fantom',
+                      symbol: 'FTM',
+                      decimals: 18
+                    }
+                  }],
+                }).then(() => {
+                  const account = {
+                    address: accounts[0],
+                  }
+                  commit('set_account',account)
+                  commit('read_pumpkittens')
+                }).catch(() => {
+                  console.log("error:wallet_switchEthereumChain")
+                });
+              }
+            });
+          }
+      }).catch((err) => {
+        if (err.code === 4001) {
+          console.log('Please connect to MetaMask.');
+        } else {
+          console.error(err);
+        }
+      });  
+    },*/
+    connect({commit}) {
+      window.ethereum.request({ 
+          method: 'eth_requestAccounts' 
+      }).then((accounts) => {
+          if(accounts.length==0) {
+              console.log("No connected");
+          } else {
+            window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0xfa' }],
+            }).then(() => {
+              console.log("wallet_switchEthereumChain")
+              const account = {
+                address: accounts[0],
+                //balance: BigNumber(balance,"ether")
+              }
+              commit('show_success','Connected')
+              commit('set_account',account)
+              commit('read_pumpkittens')
+            }).catch(error => {
+              console.log("error:wallet_switchEthereumChain",error)
+              if (error.code==4902 || error.code==-32603) {
+                window.ethereum.request({
+                  method: 'wallet_addEthereumChain',
+                  params: [{ 
+                    chainId: '0xfa', 
+                    chainName: 'FantomNetwork',
+                    rpcUrls: ['https://rpc.ftm.tools/'],
+                    blockExplorerUrls: ['https://ftmscan.com'],
                     nativeCurrency: {
                       name: 'Fantom',
                       symbol: 'FTM',
