@@ -27,18 +27,6 @@ export default {
     return {
       title: "details",
       profiles: [
-        {url: require("../images/1-1.png")},
-        {url: require("../images/1-2.png")},
-        {url: require("../images/1-3.png")},
-        {url: require("../images/1-4.png")},
- /*       {url: require("../images/5.png")},
-        {url: require("../images/6.png")},
-        {url: require("../images/7.png")},
-        {url: require("../images/8.png")},
-        {url: require("../images/9.png")},
-        {url: require("../images/10.png")},
-        {url: require("../images/11.png")},
-        {url: require("../images/12.png")},*/
       ],
     };
   },

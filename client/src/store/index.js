@@ -103,7 +103,7 @@ export default new Vuex.Store({
         })
     },
   },
-  actions: {/*
+  actions: {
     connect({commit}) {
       window.ethereum.request({ 
           method: 'eth_requestAccounts' 
@@ -120,6 +120,7 @@ export default new Vuex.Store({
                 address: accounts[0],
                 //balance: BigNumber(balance,"ether")
               }
+              console.log(account)
               commit('show_success','Connected')
               commit('set_account',account)
               commit('read_pumpkittens')
@@ -158,7 +159,7 @@ export default new Vuex.Store({
           console.error(err);
         }
       });  
-    },*/
+    },/*
     connect({commit}) {
       window.ethereum.request({ 
           method: 'eth_requestAccounts' 
@@ -213,7 +214,7 @@ export default new Vuex.Store({
           console.error(err);
         }
       });  
-    },
+    },*/
     async getTokenIdsOfOwner({state, commit},params) {
         if (state.account==null)
         {
